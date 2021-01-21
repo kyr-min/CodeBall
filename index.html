@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="style.css" rel="stylesheet">
+    <script src="library/matter.js" type="text/javascript"></script>
+    <script src="library/p5.js" type="text/javascript"></script>
+    <script src="circle.js"></script>
+    <script src="boundary.js"></script>
+    <script src="goal.js"></script>
+    <script src="done.js"></script>
+    <script src="commands.js"></script>
+    <script src="index.js"></script>
+    <title>test</title>
+</head>
+<body>
+    <!-- <input type="button" value="상" id="up" onclick="upforce()">
+    <input type="button" value="하" id="down" onclick="downforce()">
+    <input type="button" value="좌" id="left" onclick="leftforce()">
+    <input type="button" value="우" id="right" onclick="rightforce()"> -->
+    <button class="open-button" onclick="openForm()">Input</button>
+    <div class="form-popup" id="myForm">
+        <form class="form-container" id = "form_form" onsubmit="event.preventDefault();">
+          <h2 id="h2">코드</h2>
+          <button type="button" id="cancel" onclick="closeForm()">닫기</button>
+          <input type="button" id="clear_history" onclick="clear_his()" value="목록 초기화">
+          <div id="history"></div>
+
+          <input type="text" placeholder="코드" id="code">
+      
+          <input type="button" id="do_this" onclick="update()" value="입력">
+        </form>
+    </div>
+</body>
+</html>
