@@ -28,8 +28,8 @@ function sta_setup(cur_stage){
     if(obs_arr !== undefined){
         for(var i = 0; i<obs_arr.length; i++){
             var obstacle_op = obs_arr[i].obstacle_op;
-            
-            obstacle.push(new Obstacle(obstacle_op.x, obstacle_op.y, obstacle_op.w, obstacle_op.h, obstacle_op.a));
+
+            obstacle.push(new Obstacle(obstacle_op.x, obstacle_op.y, obstacle_op.w, obstacle_op.h, obstacle_op.a, obstacle_op.s));
         }
     }
     if(jump_pad_arr !== undefined){

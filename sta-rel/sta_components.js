@@ -93,7 +93,8 @@ var s2_ob1_op = {
         y: 900,
         w: 25,
         h: 275,
-        a: Math.PI * 0.3
+        a: Math.PI * 0.3,
+        s: true
     }
 }
 
@@ -103,7 +104,8 @@ var s2_ob2_op = {
         y: 900,
         w: 25,
         h: 275,
-        a: Math.PI * 0.3
+        a: Math.PI * 0.3,
+        s: true
     }
 }
 
@@ -156,10 +158,31 @@ var s3_op = {
 
 var s3_jump_pad_op = {
     jump_pad_op: {
-        x: 700,
-        y: 875,
+        x: 500,
+        y: 900,
         w: 50,
-        h: 20
+        h: 50
+    }
+}
+
+var s3_ob1_op = {
+    obstacle_op: {
+        x: 700,
+        y: 800,
+        w: 40,
+        h: 500,
+        a: 0,
+        s: false
+    }
+}
+var s3_ob2_op = {
+    obstacle_op: {
+        x: 750,
+        y: 900,
+        w: 60,
+        h: 100,
+        a: 0,
+        s: true
     }
 }
 
@@ -173,6 +196,8 @@ function return_op (stage){
             return s2_op;
         case 3:
             s3_op.jump_pad_arr.push(s3_jump_pad_op);
+            s3_op.obstacle_arr.push(s3_ob1_op);
+            s3_op.obstacle_arr.push(s3_ob2_op);
             return s3_op
     }
 }

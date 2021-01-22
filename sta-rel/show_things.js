@@ -16,6 +16,5 @@ function show_things() {
             jump_pad[i].show();
         }
     }
-
     goal.show()
 }

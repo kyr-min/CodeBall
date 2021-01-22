@@ -1,10 +1,20 @@
-function Obstacle(x, y, width, height, angle) {
+function Obstacle(x, y, width, height, angle, static) {
+    
     var static_options = {
         isStatic: true,
         angle: angle
     }
 
-    this.body = Bodies.rectangle(x, y, width, height, static_options);
+    var dynamic_options = {
+        isStatic: false,
+        angle: angle
+    }
+
+    if(static === false){
+        this.body = Bodies.rectangle(x, y, width, height, dynamic_options);
+    } else {
+        this.body = Bodies.rectangle(x, y, width, height, static_options);
+    }
     this.width= width;
     this.height = height;
     World.add(world, this.body);

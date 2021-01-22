@@ -17,6 +17,7 @@ var opt= [];
 opt.push(return_op(1));
 opt.push(return_op(2));
 opt.push(return_op(3));
+opt.push(return_op(4));
 
 var bg_img;
 
@@ -49,11 +50,14 @@ if (stage !== undefined) {
     function draw() {
         var player_pos = player.body.position;
         var goal_pos = goal.body.position;
+        var jump0;
 
         background(bg_img);
         Engine.update(engine);
 
         show_things();
+
+        
 
         if(isClear(player_pos.x, player_pos.y, goal_pos.x, goal_pos.y, goal.width, goal.height)){
             stage++;
@@ -63,7 +67,12 @@ if (stage !== undefined) {
             document.getElementsByTagName("main")[0].innerHTML="";
             setup();
         }
-        
+        if(jump_pad.length !== 0){
+            jump0 = jump_pad[0];
+            if(isOn_jump(player_pos.x, player_pos.y, jump_pad[0].body.position.x, jump_pad[0].body.position.y, jump_pad[0].width, jump_pad[0].height)){
+                force("player", "up", 0.2);
+            }
+        }
     }
 }
 

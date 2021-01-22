@@ -3,7 +3,6 @@ function force(target, direction, power){
         target = world.bodies[4];
         switch(direction){
             case "up" : 
-                
                 Body.applyForce(target, {x: target.position.x, y: target.position.y }, { x: 0, y: -power});
                 break;
 
