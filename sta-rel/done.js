@@ -6,3 +6,7 @@ function isClear(player_x, player_y, goal_x, goal_y, width, height) {
 
     return (goal_x1 <= player_x && player_x <= goal_x2 && goal_y1 <= player_y && player_y <= goal_y2);
 }
+
+function isOut(player_x, player_y) {
+    return (player_x < -100 || player_x > 1920 || player_y < -100 || player_y > 1020);
+}

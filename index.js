@@ -12,93 +12,13 @@ var world;
 var player;
 var goal;
 
-var s1_op = {
-    gr_op: {
-        x: (window.innerWidth - 25) / 2,
-        y: window.innerHeight - 25,
-        w: window.innerWidth + 100,
-        h: 10
-    },
+var opt= [];
 
-    left_op: {
-        x: -5,
-        y: 0,
-        w: 10,
-        h: (window.innerHeight - 25) * 2
-    },
+opt.push(return_op(1));
+opt.push(return_op(2));
+opt.push(return_op(3));
 
-    right_op: {
-        x: window.innerWidth - 20,
-        y: 0,
-        w: 10,
-        h: (window.innerHeight - 25) * 2
-    },
-
-    roof_op: {
-        x: (window.innerWidth - 25) / 2,
-        y: 0,
-        w: window.innerWidth + 100,
-        h: 10
-    },
-
-    player_op: {
-        x: 200,
-        y: 100,
-        w: 50
-    },
-
-    goal_op: {
-        x: 1500, 
-        y: window.innerHeight - 75, 
-        w: 100, 
-        h: 85
-    }
-
-}
-
-var s2_op = {
-    gr_op: {
-        x: (window.innerWidth - 25) / 2,
-        y: window.innerHeight - 25,
-        w: window.innerWidth + 100,
-        h: 10
-    },
-
-    left_op: {
-        x: -5,
-        y: 0,
-        w: 10,
-        h: (window.innerHeight - 25) * 2
-    },
-
-    right_op: {
-        x: window.innerWidth - 20,
-        y: 0,
-        w: 10,
-        h: (window.innerHeight - 25) * 2
-    },
-
-    roof_op: {
-        x: (window.innerWidth - 25) / 2,
-        y: 0,
-        w: window.innerWidth + 100,
-        h: 10
-    },
-
-    player_op: {
-        x: 200,
-        y: 100,
-        w: 50
-    },
-
-    goal_op: {
-        x: 1000, 
-        y: window.innerHeight - 75, 
-        w: 100, 
-        h: 85
-    }
-
-}
+var bg_img;
 
 var command_list = ["force"];
 
@@ -110,128 +30,41 @@ var rightWall;
 var roof;
 
 var obstacle = [];
+var jump_pad = [];
 
 var history_list = [];
 
 if (stage !== undefined) {
     function setup() {
-        createCanvas(window.innerWidth - 25, window.innerHeight - 25);
+        bg_img = loadImage('https://i.ibb.co/gyxrWjS/test.jpg');
+        createCanvas(1800, 920);
         engine = Engine.create();
         world = engine.world;
         Engine.run(engine);
 
-        switch (stage) {
-            case 1:
-                ground = new Boundary(s1_op.gr_op.x, s1_op.gr_op.y, s1_op.gr_op.w, s1_op.gr_op.h);
-
-                leftWall = new Boundary(s1_op.left_op.x, s1_op.left_op.y, s1_op.left_op.w, s1_op.left_op.h);
-
-                rightWall = new Boundary(s1_op.right_op.x, s1_op.right_op.y, s1_op.right_op.w, s1_op.right_op.h);
-
-                roof = new Boundary(s1_op.roof_op.x, s1_op.roof_op.y, s1_op.roof_op.w, s1_op.roof_op.h);
-
-                player= new Circle(s1_op.player_op.x, s1_op.player_op.y, s1_op.player_op.w);
-
-                goal= new Goal(s1_op.goal_op.x, s1_op.goal_op.y, s1_op.goal_op.w, s1_op.goal_op.h);
-                break;
-
-            case 2:
-                ground = new Boundary(s2_op.gr_op.x, s2_op.gr_op.y, s2_op.gr_op.w, s2_op.gr_op.h);
-
-                leftWall = new Boundary(s2_op.left_op.x, s2_op.left_op.y, s2_op.left_op.w, s2_op.left_op.h);
-
-                rightWall = new Boundary(s2_op.right_op.x, s2_op.right_op.y, s2_op.right_op.w, s2_op.right_op.h);
-
-                roof = new Boundary(s2_op.roof_op.x, s2_op.roof_op.y, s2_op.roof_op.w, s2_op.roof_op.h);
-
-                player= new Circle(s2_op.player_op.x, s2_op.player_op.y, s2_op.player_op.w);
-
-                goal= new Goal(s2_op.goal_op.x, s2_op.goal_op.y, s2_op.goal_op.w, s2_op.goal_op.h);
-                break;
-        }
-
+        sta_setup(stage);
 
     }
+
     function draw() {
-        background(51);
+        var player_pos = player.body.position;
+        var goal_pos = goal.body.position;
+
+        background(bg_img);
         Engine.update(engine);
 
-        switch (stage) {
-            case 1:
-                roof.show();
-                ground.show();
-                leftWall.show();
-                rightWall.show();
-    
-                player.show();
+        show_things();
 
-                goal.show();
-                break;
-            case 2:
-                roof.show();
-                ground.show();
-                leftWall.show();
-                rightWall.show();
-    
-                player.show();
-
-                goal.show()
-                break;
-        }
-        if(isClear(player.body.position.x, player.body.position.y, goal.body.position.x, goal.body.position.y, goal.width, goal.height)){
+        if(isClear(player_pos.x, player_pos.y, goal_pos.x, goal_pos.y, goal.width, goal.height)){
             stage++;
+            document.getElementsByTagName("main")[0].innerHTML="";
+            setup();
+        } else if(isOut(player_pos.x, player_pos.y)){
             document.getElementsByTagName("main")[0].innerHTML="";
             setup();
         }
         
     }
-}
-function force(target, direction, power){
-
-    if(target === "player"){
-        console.log(target);
-        console.log(direction);
-        target = world.bodies[4];
-        switch(direction){
-            case "up" : 
-                
-                Body.applyForce(target, {x: target.position.x, y: target.position.y }, { x: 0, y: -power});
-                break;
-
-            case "down" : 
-                Body.applyForce(target, {x: target.position.x, y: target.position.y }, { x: 0, y: +power});
-                break;
-
-            case "left" :
-                Body.applyForce(target, {x: target.position.x, y: target.position.y }, { x: -power, y: 0});
-                break;
-
-            case "right" :
-                console.log("called");
-                Body.applyForce(target, {x: target.position.x, y: target.position.y }, { x: +power, y: 0});
-                break;
-            default:
-                return;
-        }
-    }
-    param = [];
-    return ;
-}
-
-
-
-// function mousePressed() {
-//     boxes.push(new Box(mouseX, mouseY, 50));
-// }
-
-
-
-function openForm() {
-    document.getElementById("myForm").style.display = "block";
-}
-
-function closeForm() {
-    document.getElementById("myForm").style.display = "none";
 }
 
 function update() {

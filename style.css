@@ -33,6 +33,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
   cursor: pointer;
   opacity: 0.8;
   position: fixed;
+  right: 8px;
   /* bottom: 23px;
   right: 28px;
   width: 280px; */
@@ -42,6 +43,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 .form-popup {
   display: none;
   position: fixed;
+  right: 8px;
   /* bottom: 0;
   right: 15px; */
   border: 3px solid #f1f1f1;
@@ -52,6 +54,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 .form-container {
   max-width: 350px;
   max-height: 700px;
+  opacity: 1;
   padding: 10px;
   background-color: white;
 }
@@ -132,4 +135,10 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 p {
   display: inline-block;
+}
+
+#explain {
+  position: absolute;
+  z-index: 3;
+  display: inline;
 }
