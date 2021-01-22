@@ -16,5 +16,10 @@ function show_things() {
             jump_pad[i].show();
         }
     }
+    if (grav_pad.length !== undefined) {
+        for (let i = 0; i < grav_pad.length; i++) {
+            grav_pad[i].show();
+        }
+    }
     goal.show()
 }

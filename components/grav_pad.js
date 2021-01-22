@@ -1,4 +1,4 @@
-function Grav(x, y, width, height) {
+function Grav_pad(x, y, width, height) {
     var options = {
         isStatic: true,
         isSensor: true 

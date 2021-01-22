@@ -10,9 +10,10 @@
     <script src="components/obstacle.js"></script>
     <script src="components/goal.js"></script>
     <script src="components/jump_pad.js"></script>
-    <script src="components/grav.js"></script>
+    <script src="components/grav_pad.js"></script>
     <script src="html-rel/input_op_cl.js"></script>
     <script src="component-action/jump_pad_action.js"></script>
+    <script src="component-action/grav_pad_action.js"></script>
     <script src="sta-rel/done.js"></script>
     <script src="sta-rel/sta_components.js"></script>
     <script src="sta-rel/sta_setup.js"></script>
@@ -27,7 +28,7 @@
     <div class="form-popup" id="myForm">
         <form class="form-container" id = "form_form" onsubmit="event.preventDefault();">
           <h2 id="h2">코드</h2>
-          <input type="button" id="clear_history" onclick="clear_his()" value="목록 초기화">
+          <input type="button" id="clear_history" onclick="next_level()" value="목록 초기화">
           <button type="button" id="cancel" onclick="closeForm()">닫기</button>
           <div id="history"></div>
 

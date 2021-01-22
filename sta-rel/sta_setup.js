@@ -9,9 +9,11 @@ function sta_setup(cur_stage){
     var goal_op = opt[cur_stage].goal_op;
     var obs_arr = opt[cur_stage].obstacle_arr;
     var jump_pad_arr = opt[cur_stage].jump_pad_arr;
+    var grav_pad_arr = opt[cur_stage].grav_pad_arr;
 
     obstacle = [];
     jump_pad = [];
+    grav_pad = [];
 
     ground = new Boundary(gr_op.x, gr_op.y, gr_op.w, gr_op.h);
 
@@ -36,7 +38,14 @@ function sta_setup(cur_stage){
         for(var i = 0; i<jump_pad_arr.length; i++){
             var jump_pad_op = jump_pad_arr[i].jump_pad_op;
             
-            jump_pad.push(new Jump_pad(jump_pad_op.x, jump_pad_op.y, jump_pad_op.w, jump_pad_op.h, jump_pad_op.a));
+            jump_pad.push(new Jump_pad(jump_pad_op.x, jump_pad_op.y, jump_pad_op.w, jump_pad_op.h));
+        }
+    }
+    if(grav_pad_arr !== undefined){
+        for(var i = 0; i<grav_pad_arr.length; i++){
+            var grav_pad_op = grav_pad_arr[i].grav_pad_op;
+            
+            grav_pad.push(new Grav_pad(grav_pad_op.x, grav_pad_op.y, grav_pad_op.w, grav_pad_op.h));
         }
     }
 }

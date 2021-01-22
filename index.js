@@ -1,5 +1,8 @@
 var stage = 1;
 
+var called;
+var last_called= 0;
+
 var Engine = Matter.Engine,
     World = Matter.World,
     Body = Matter.Body,
@@ -32,6 +35,7 @@ var roof;
 
 var obstacle = [];
 var jump_pad = [];
+var grav_pad = [];
 
 var history_list = [];
 
@@ -50,7 +54,6 @@ if (stage !== undefined) {
     function draw() {
         var player_pos = player.body.position;
         var goal_pos = goal.body.position;
-        var jump0;
 
         background(bg_img);
         Engine.update(engine);
@@ -68,12 +71,37 @@ if (stage !== undefined) {
             setup();
         }
         if(jump_pad.length !== 0){
-            jump0 = jump_pad[0];
             if(isOn_jump(player_pos.x, player_pos.y, jump_pad[0].body.position.x, jump_pad[0].body.position.y, jump_pad[0].width, jump_pad[0].height)){
                 force("player", "up", 0.2);
             }
         }
+        if(grav_pad.length !== 0){
+            var first;
+            for(var i = 0; i< grav_pad.length; i++){
+                if(isOn_grav(player_pos.x, player_pos.y, grav_pad[i].body.position.x, grav_pad[i].body.position.y, grav_pad[i].width, grav_pad[i].height)){
+                    if(called === undefined){
+                        first = true;
+                    }
+                    called = new Date().getTime();
+
+                    if((called- last_called) / 1000 >= 1 || first){
+                        console.log((called- last_called) / 1000);
+                        world.gravity.scale = -world.gravity.scale;
+                        last_called = new Date().getTime();
+                        first = false;
+                    }
+                }
+            }
+            
+            
+        }
     }
+}
+
+function next_level() {
+    stage++;
+    document.getElementsByTagName("main")[0].innerHTML="";
+    setup();
 }
 
 function update() {
