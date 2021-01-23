@@ -1,20 +1,12 @@
-/* #up, #down, #left, #right {
-    position: absolute;
-    top: 100px;
-}
-#up {
-    left: 20px;
+#cor {
+  position: absolute;
 }
 
-#down {
-    left: 40px;
+.cor_text {
+  margin: 30px;
+  color:white;
 }
-#left {
-    left: 60px;
-}
-#right {
-    left: 80px;
-} */
+
 
 #defaultCanvas0 {
     display: inline;
@@ -24,7 +16,6 @@
 body {font-family: Arial, Helvetica, sans-serif;}
 * {box-sizing: border-box;}
 
-/* Button used to open the contact form - fixed at the bottom of the page */
 .open-button {
   background-color: #555;
   color: white;
@@ -39,7 +30,14 @@ body {font-family: Arial, Helvetica, sans-serif;}
   width: 280px; */
 }
 
-/* The popup form - hidden by default */
+#explain {
+  right: 90px;
+}
+
+#reset {
+  right: 180px;
+}
+
 .form-popup {
   display: none;
   position: fixed;
@@ -50,7 +48,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
   z-index: 9;
 }
 
-/* Add styles to the form container */
 .form-container {
   max-width: 350px;
   max-height: 700px;
@@ -59,7 +56,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
   background-color: white;
 }
 
-/* Full-width input fields */
 .form-container input[type=text]{
   width: 100%;
   padding: 15px;
@@ -68,13 +64,11 @@ body {font-family: Arial, Helvetica, sans-serif;}
   background: #f1f1f1;
 }
 
-/* When the inputs get focus, do something */
 .form-container input[type=text]:focus{
   background-color: #ddd;
   outline: none;
 }
 
-/* Set a style for the submit/login button */
 .form-container #submit {
   background-color: #4CAF50;
   color: white;
@@ -86,7 +80,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
   opacity: 0.8;
 }
 
-/* Add a red background color to the cancel button */
 .form-container #cancel {
   background-color: red;
   color: white;
@@ -108,7 +101,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
   width: 150px;
 }
 
-/* Add some hover effects to buttons */
+
 .form-container .btn:hover, .open-button:hover {
   opacity: 1;
 }

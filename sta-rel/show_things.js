@@ -21,5 +21,10 @@ function show_things() {
             grav_pad[i].show();
         }
     }
+    if (death_pad.length !== undefined){
+        for (let i = 0; i < death_pad.length; i++) {
+            death_pad[i].show();
+        }
+    }
     goal.show()
 }

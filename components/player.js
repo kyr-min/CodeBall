@@ -1,4 +1,4 @@
-function Circle(x, y, width) {
+function Player(x, y, width) {
     var options = {
         friction: 0.3,
         restitution: 0.6

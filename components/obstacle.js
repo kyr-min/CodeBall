@@ -9,7 +9,6 @@ function Obstacle(x, y, width, height, angle, static) {
         isStatic: false,
         angle: angle
     }
-
     if(static === false){
         this.body = Bodies.rectangle(x, y, width, height, dynamic_options);
     } else {
