@@ -7,6 +7,11 @@
   color:white;
 }
 
+#code_in {
+  color: black;
+  background-color: darkturquoise;
+}
+
 
 #defaultCanvas0 {
     display: inline;
@@ -31,6 +36,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 }
 
 #explain {
+  position:fixed;
   right: 90px;
 }
 
@@ -130,8 +136,38 @@ p {
   display: inline-block;
 }
 
-#explain {
-  position: absolute;
-  z-index: 3;
-  display: inline;
+
+#explain-popup {
+  display: none;
+  position: fixed;
+  right: 8px;
+  /* bottom: 0;
+  right: 15px; */
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
+#close_explain {
+  background-color: red;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  cursor: pointer;
+  margin-bottom:10px;
+  opacity: 0.8; 
+  width: 100px;
+}
+
+#explain_container {
+  max-width: 350px;
+  max-height: 700px;
+  opacity: 1;
+  padding: 10px;
+  background-color: white;
+}
+
+.explain-btn {
+  background-color: #555;
+  color: white;
+  padding: 16px 20px;
 }

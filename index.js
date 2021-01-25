@@ -197,31 +197,6 @@ function clear_his() {
 }
 
 window.addEventListener("load", () => {
-    document.getElementById("explain").addEventListener("click", () => {
-        switch(stage){
-            case 2:
-            case 1:
-                window.open("https://i.ibb.co/KwLFgWY/sta1-explain.jpg",'_blank');
-                break;
-            case 3:
-                window.open("https://i.ibb.co/2FQhDs8/st3-1.jpg", '_blank');
-                break;
-            case 4:
-                window.open("https://i.ibb.co/WvrwVVZ/st4.jpg", '_blank');
-                break;
-            case 5:
-                window.open("https://i.ibb.co/d54pfY4/add.jpg", "_blank");
-                break;
-            case 6:
-                window.open("https://i.ibb.co/gZK9MxQ/death.jpg", "_blank");
-                break;
-            case 7:
-            case 8:
-                alert("응용해서 해보세요!");
-                break;
-        }
-    })
-
     document.getElementById("reset").addEventListener("click", () => { 
         document.getElementsByTagName("main")[0].innerHTML="";
         setup();

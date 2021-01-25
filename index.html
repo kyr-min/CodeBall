@@ -13,7 +13,6 @@
     <script src="components/grav_pad.js"></script>
     <script src="components/death_pad.js"></script>
     <script src="html-rel/bgImg.js"></script>
-    
     <script src="component-action/jump_pad_action.js"></script>
     <script src="component-action/grav_pad_action.js"></script>
     <script src="component-action/death_pad_action.js"></script>
@@ -23,11 +22,11 @@
     <script src="sta-rel/show_things.js"></script>
     <script src="commands.js"></script>
     <script src="index.js"></script>
-    <title>test</title>
+    <title>CodeBall</title>
 </head>
 <body>
-    <button class="open-button" onclick="openForm()">코드</button>
-    <button class="open-button" id="explain">설명</button>
+    <button class="open-button" id ="code_in"onclick="openForm()">코드</button>
+    <button class="open-button" id="explain" onclick="whatExplain()">설명</button>
     <button class="open-button" id="reset">초기화</button>
     <div id="cor" class="cor_text"></div>
     <div class="form-popup" id="myForm">
@@ -42,8 +41,18 @@
           <input type="button" id="do_this" onclick="update()" value="입력">
         </form>
     </div>
+    <div id="explain-popup">
+        <div id="explain_container">
+            <button type="button" onclick="explain_force()" class="explain-btn">움직이기</button><br>
+            <button type="button" onclick="explain_jump()" class="explain-btn" >점프대</button><br>
+            <button type="button" onclick="explain_grav()" class="explain-btn" >중력패드</button><br>
+            <button type="button" onclick="explain_death()" class="explain-btn" >금지 블럭</button><br>
+            <button type="button" onclick="explain_add()" class="explain-btn" >추가하기</button><br>
+            <button type="button" id="close_explain" onclick="closeExplain()">닫기</button>
+        </div>
+    </div>
     <script src="html-rel/print_cor.js"></script>
     <script src="html-rel/input_op_cl.js"></script>
-    <script src="html-rel/show_img.js"></script>
+    <script src="html-rel/explain.js"></script>
 </body>
 </html>

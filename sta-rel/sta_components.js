@@ -524,9 +524,9 @@ var s7_op = {
 
 var s7_dea1_op = {
     death_pad_op: {
-        x: 770,
+        x: 1000,
         y: 10,
-        w: 1820,
+        w: 2300,
         h: 50
     }
 }
@@ -605,9 +605,9 @@ var s8_op = {
 
 var s8_dea1_op = {
     death_pad_op: {
-        x: 770,
+        x: 1000,
         y: 10,
-        w: 1820,
+        w: 2300,
         h: 50
     }
 }
