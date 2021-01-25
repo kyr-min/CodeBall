@@ -548,6 +548,16 @@ var s7_ob1_op = {
         s: true
     }
 }
+var s7_ob2_op = {
+    obstacle_op: {
+        x: 764,
+        y: 739,
+        w: 50,
+        h: 275,
+        a: 0,
+        s: true
+    }
+}
 
 
 
@@ -685,6 +695,7 @@ function return_op (stage){
             s7_op.death_pad_arr.push(s7_dea1_op);
             s7_op.death_pad_arr.push(s7_dea2_op);
             s7_op.obstacle_arr.push(s7_ob1_op);
+            s7_op.obstacle_arr.push(s7_ob2_op);
             return s7_op;
         case 8:
             s8_op.death_pad_arr.push(s8_dea1_op);
