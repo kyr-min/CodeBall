@@ -5,7 +5,8 @@ function show_things() {
     rightWall.show();
 
     player.show();
-
+    goal.show()
+    
     if (obstacle.length !== undefined) {
         for (let i = 0; i < obstacle.length; i++) {
             obstacle[i].show();
@@ -26,5 +27,20 @@ function show_things() {
             death_pad[i].show();
         }
     }
-    goal.show()
+    
+    if (us_add_ob.length !== undefined) {
+        for (let i = 0; i < us_add_ob.length; i++) {
+            us_add_ob[i].show();
+        }
+    }
+    if (us_add_jump.length !== undefined) {
+        for (let i = 0; i < us_add_jump.length; i++) {
+            us_add_jump[i].show();
+        }
+    }
+    if (us_add_grav.length !== undefined) {
+        for (let i = 0; i < us_add_grav.length; i++) {
+            us_add_grav[i].show();
+        }
+    }
 }

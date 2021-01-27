@@ -1,4 +1,5 @@
 function force(direction, power) {
+    var error = 0;
     target = world.bodies[4];
 
     power /= 100;
@@ -23,13 +24,15 @@ function force(direction, power) {
             });
             break;
         default:
-            return;
+            error = 1;
+            return error;
     }
     param = [];
-    return;
+    return ;
 }
 
 function add(what, x, y, w, h, a, static) {
+    var error = 0;
     y = -y + 920;
     if (isNaN(w)) {
         w = 50;
@@ -54,14 +57,19 @@ function add(what, x, y, w, h, a, static) {
     a *= PI / 180;
 
     if (what === "jump_pad") {
-        jump_pad.push(new Jump_pad(x, y, w, h));
+        us_add_jump.push(new Jump_pad(x, y, w, h));
+        us_recent.push(new Jump_pad(x, y, w, h));
     } else if (what === "grav_pad") {
-        grav_pad.push(new Grav_pad(x, y, w, h));
+        us_add_grav.push(new Grav_pad(x, y, w, h));
+        us_recent.push(new Grav_pad(x, y, w, h));
     } else if (what === "obstacle") {
-        obstacle.push(new Obstacle(x, y, w, h, a, static))
+        us_add_ob.push(new Obstacle(x, y, w, h, a, static));
+        us_recent.push(new Obstacle(x, y, w, h, a, static));
+    } else{
+        return error;
     }
     param = [];
-    return;
+    return ;
 }
 
 function jump(direction, power) {

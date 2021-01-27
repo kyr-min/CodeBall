@@ -171,3 +171,12 @@ p {
   color: white;
   padding: 16px 20px;
 }
+
+#finished {
+  display: flex;
+  justify-content: center;
+}
+
+#undo {
+  right: 270px;
+}

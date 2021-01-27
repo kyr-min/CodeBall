@@ -45,7 +45,10 @@ var jump_pad = [];
 var grav_pad = [];
 var death_pad = [];
 
-var history_list = [];
+var us_add_ob = [];
+var us_add_jump = [];
+var us_add_grav = [];
+var us_recent = [];
 
 if (stage !== undefined) {
     function setup() {
@@ -72,7 +75,8 @@ if (stage !== undefined) {
             
             if(stage >= 8){
                 document.getElementsByTagName("body")[0].innerHTML="";
-                document.write("<h1>축하합니다! 다 끝내셨어요!</h1>");
+                document.write("<h1 id='finished'>축하합니다! 다 끝내셨어요!</h1>");
+                return ;
             } else {
                 stage++;
                 document.getElementsByTagName("main")[0].innerHTML="";
@@ -83,7 +87,7 @@ if (stage !== undefined) {
             document.getElementsByTagName("main")[0].innerHTML="";
             setup();
         }
-        if(jump_pad.length !== 0){
+        if(jump_pad.length !== 0 || us_add_jump.length !== 0){
             var first;
             for(var i = 0; i< jump_pad.length; i++){
                 if(isOn_jump(player_pos.x, player_pos.y, jump_pad[i].body.position.x, jump_pad[i].body.position.y, jump_pad[i].width, jump_pad[i].height)){
@@ -104,11 +108,44 @@ if (stage !== undefined) {
                     }
                 }
             }
+            for(var i = 0; i< us_add_jump.length; i++){
+                if(isOn_jump(player_pos.x, player_pos.y, us_add_jump[i].body.position.x, us_add_jump[i].body.position.y, us_add_jump[i].width, us_add_jump[i].height)){
+                    if(jump_called === undefined){
+                        first = true;
+                    }
+                    jump_called = new Date().getTime();
+
+                    if((jump_called- jump_last_called) / 1000 >= 1 || first){
+                        if(world.gravity.scale > 0){
+                            jump("up", 0.2);
+                        } else if(world.gravity.scale < 0){
+                            jump("down", 0.2);
+                        }
+                        
+                        grav_last_called = new Date().getTime();
+                        first = false;
+                    }
+                }
+            }
         }
-        if(grav_pad.length !== 0){
+        if(grav_pad.length !== 0 || us_add_grav.length !== 0){
             var first;
             for(var i = 0; i< grav_pad.length; i++){
                 if(isOn_grav(player_pos.x, player_pos.y, grav_pad[i].body.position.x, grav_pad[i].body.position.y, grav_pad[i].width, grav_pad[i].height)){
+                    if(grav_called === undefined){
+                        first = true;
+                    }
+                    grav_called = new Date().getTime();
+
+                    if((grav_called- grav_last_called) / 1000 >= 1 || first){
+                        world.gravity.scale = -world.gravity.scale;
+                        grav_last_called = new Date().getTime();
+                        first = false;
+                    }
+                }
+            }
+            for(var i = 0; i< us_add_grav.length; i++){
+                if(isOn_grav(player_pos.x, player_pos.y, us_add_grav[i].body.position.x, us_add_grav[i].body.position.y, us_add_grav[i].width, us_add_grav[i].height)){
                     if(grav_called === undefined){
                         first = true;
                     }
@@ -147,6 +184,7 @@ function update() {
 
 
     if(command_list.find(element => element === comm) !== undefined){
+        var failed = 0;
         for(var i = open_brack_loc +1; i <= close_brack_loc; i++){
             
             if(input[i] == ","){
@@ -167,18 +205,17 @@ function update() {
 
         switch(comm){
             case "force": 
-                force(param[0], param[1]);
+                failed = force(param[0], param[1]);
                 break;
             case "add":
-                add(param[0], parseInt(param[1]), parseInt(param[2]), parseInt(param[3]), parseInt(param[4]), parseInt(param[5]), param[6]);
+                failed = add(param[0], parseInt(param[1]), parseInt(param[2]), parseInt(param[3]), parseInt(param[4]), parseInt(param[5]), param[6]);
                 break;
         }
-        
-        now.innerHTML = `<img src=${check_icon_src} alt="check" id="check_icon">${input}`;
-        history_list.push(input);
-
-        
-
+        if(failed !== 1){
+            now.innerHTML = `<img src=${check_icon_src} alt="check" id="check_icon">${input}`;
+        } else {
+            now.innerHTML = `<img src=${alert_icon_src} alt='alert' id='alert_icon'>명령어의 형식이 잘못되었습니다.`;
+        }
     } else {
         now.innerHTML = `<img src=${alert_icon_src} alt="alert" id="alert_icon">${comm}은 명령어가 아닙니다.`;
     }
@@ -191,9 +228,6 @@ function clear_his() {
 
     input.value = null;
     hist_div.innerHTML = "";
-    
-
-    history_list.splice(0, history_list.length);
 }
 
 window.addEventListener("load", () => {
@@ -201,4 +235,33 @@ window.addEventListener("load", () => {
         document.getElementsByTagName("main")[0].innerHTML="";
         setup();
     })
+    document.getElementById("undo").addEventListener("click", () => {
+        if(us_recent[us_recent.length-1].constructor.name === "Obstacle"){
+            us_add_ob.splice(us_add_ob.length-1, 1); 
+        }
+        else if(us_recent[us_recent.length-1].constructor.name === "Jump_pad"){
+            us_add_jump.splice(us_add_jump.length-1, 1); 
+        }
+        else if(us_recent[us_recent.length-1].constructor.name === "Grav_pad"){
+            us_add_grav.splice(us_add_grav.length-1, 1); 
+        }
+    })
 })
+
+function dev_next_level() {
+    if(stage >= 8){
+        document.getElementsByTagName("body")[0].innerHTML="";
+        var div = document.createElement("div");
+        div.setAttribute("id", "all_div");
+        document.getElementsByTagName("body")[0].appendChild(div);
+        document.write("<h1 id='finished'>축하합니다! 다 끝내셨어요!</h1>");
+        var img = document.createElement("img");
+        img.src = "https://c8.alamy.com/comp/BKW1KN/young-man-blowing-party-horn-blower-close-up-BKW1KN.jpg"
+        document.getElementById("img_div").appendChild(img);
+        return ;
+    }else {
+        stage++;
+        document.getElementsByTagName("main")[0].innerHTML="";
+        setup();
+    }
+}
